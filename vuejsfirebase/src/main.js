@@ -4,7 +4,13 @@ import Vue from 'vue'
 import VueFire from 'vuefire'
 import App from './App'
 import router from './router'
+import swal from 'sweetalert2'
 
+const swalPlugin={}
+swalPlugin.install = (Vue) => {
+  Vue.prototype.$swal = swal
+}
+Vue.use(swalPlugin)
 Vue.use(VueFire)
 Vue.config.productionTip = false
 

@@ -1,35 +1,38 @@
 <template>
-  <div id="app" class="container">
-    <app-book-list v-for="book in books" :key="book.id" :book="book"></app-book-list>
+  <div id="app" class="col-md-10">
+    <app-header></app-header>
+    <app-add-book></app-add-book>
+    <app-book-list :books="books"></app-book-list>
   </div>
 </template>
 
 <script>
+  import Header from './components/Header.vue'
   import BookList from './components/BookList.vue'
-  import Firebase from 'firebase'
-  let config = {
-    apiKey: "AIzaSyApxx1IYvZmmV7TdtZUO7QU341YSqv5e4U",
-    authDomain: "vuejs-firebase-01-3b3e7.firebaseapp.com",
-    databaseURL: "https://vuejs-firebase-01-3b3e7.firebaseio.com",
-    projectId: "vuejs-firebase-01-3b3e7",
-    storageBucket: "vuejs-firebase-01-3b3e7.appspot.com",
-    messagingSenderId: "122647057086"
-  };
-  let app = Firebase.initializeApp(config);
-  let db = app.database()
-  let bookRef = db.ref('books')
+  import AddBook from './components/AddBook.vue'
+  import db from './Firebase/firebase'
 
   export default {
     name: 'app',
     firebase:{
-      books: bookRef
+      books: db.ref('books')
     },
     components:{
-      appBookList : BookList
+      appHeader : Header,
+      appBookList : BookList,
+      appAddBook : AddBook
     }
   }
 </script>
 
 <style>
-
+  #app {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+    padding-left: 18%;
+  }
+  th{
+    text-align: center;
+  }
 </style>
